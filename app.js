@@ -1,5 +1,7 @@
 const $employeeCardsWrapper = document.querySelector(".employee-cards-wrapper");
 
+const $mainWrapper = document.querySelector(".main-wrapper");
+
 // const employees = [
 //   {
 //     picture: "./user.jpg",
@@ -134,6 +136,48 @@ fetch("https://randomuser.me/api/?results=12&inc=picture,name,email,location")
       $newEmployeeInfo.appendChild($newEmail);
       $newEmployeeInfo.appendChild($newCity);
       $employeeCardsWrapper.appendChild($newEmployeeCard);
+
+      // Full info
+      function fullInfoModal(picture, firstName, lastName) {
+        const $fullInfoWrapper = document.createElement("div");
+        $fullInfoWrapper.classList.add("full-info-wrapper");
+        // $fullInfoWrapper.classList.add("hidden");
+
+        const $fullInfoCard = document.createElement("div");
+        $fullInfoCard.classList.add("full-info-card");
+
+        const $fullInfoPicture = document.createElement("img");
+        $fullInfoPicture.classList.add("employee-card-picture");
+        $fullInfoPicture.setAttribute("src", picture);
+
+        const $fullInfoList = document.createElement("ul");
+        $fullInfoList.classList.add("employee-info-list");
+
+        const $fullInfoName = document.createElement("li");
+        $fullInfoName.classList.add("name");
+
+        const $fullInfoFirstName = document.createElement("span");
+        $fullInfoFirstName.classList.add("first-name");
+        $fullInfoFirstName.textContent = firstName;
+
+        const $fullInfoLastName = document.createElement("span")
+        $fullInfoLastName.classList.add("last-name")
+        $fullInfoLastName.textContent = lastName
+
+        $fullInfoWrapper.appendChild($fullInfoCard);
+        $fullInfoCard.appendChild($fullInfoPicture);
+        $fullInfoCard.appendChild($fullInfoList);
+        $fullInfoList.appendChild($fullInfoName)
+        $fullInfoName.appendChild($fullInfoFirstName)
+        $fullInfoName.appendChild($fullInfoLastName)
+        $mainWrapper.appendChild($fullInfoWrapper);
+      }
+
+      $newEmployeeCard.addEventListener("click", () => {
+        console.log(employee);
+
+        fullInfoModal(employee.picture.large, employee.name.first, employee.name.last)
+      });
     });
   })
   .catch(function (err) {
