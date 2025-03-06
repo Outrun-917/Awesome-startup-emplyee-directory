@@ -1,128 +1,141 @@
 const $employeeCardsWrapper = document.querySelector(".employee-cards-wrapper");
 
-const employees = [
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-  {
-    picture: "./user.jpg",
-    firstName: "Marc",
-    lastName: "Strong",
-    email: "mstrong@email.com",
-    city: "London",
-  },
-];
+// const employees = [
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+//   {
+//     picture: "./user.jpg",
+//     firstName: "Marc",
+//     lastName: "Strong",
+//     email: "mstrong@email.com",
+//     city: "London",
+//   },
+// ];
 
-employees.forEach(function (employee) {
-  const $newEmployeeCard = document.createElement("div");
-  $newEmployeeCard.classList.add("employee-card");
+let employees;
 
-  const $newPicture = document.createElement("img");
-  $newPicture.classList.add("employee-card-picture");
-  $newPicture.setAttribute("src", employee.picture);
+fetch("https://randomuser.me/api/?results=12&inc=picture,name,email,location")
+  .then(function (res) {
+    return res.json();
+  })
+  .then(function (data) {
+    employees = data.results;
 
-  const $newEmployeeInfo = document.createElement("ul");
-  $newEmployeeInfo.classList.add("employee-info-list");
+    employees.forEach(function (employee) {
+      const $newEmployeeCard = document.createElement("div");
+      $newEmployeeCard.classList.add("employee-card");
 
-  const $newName = document.createElement("li");
-  $newName.classList.add("name");
+      const $newPicture = document.createElement("img");
+      $newPicture.classList.add("employee-card-picture");
+      $newPicture.setAttribute("src", employee.picture.large);
 
-  const $newFirstName = document.createElement("span");
-  $newFirstName.classList.add("first-name");
-  $newFirstName.textContent = employee.firstName;
+      const $newEmployeeInfo = document.createElement("ul");
+      $newEmployeeInfo.classList.add("employee-info-list");
 
-  const $newLastName = document.createElement("span");
-  $newLastName.classList.add("last-name");
-  $newLastName.textContent = employee.lastName;
+      const $newName = document.createElement("li");
+      $newName.classList.add("name");
 
-  const $newEmail = document.createElement("li");
-  $newEmail.classList.add("email");
-  $newEmail.textContent = employee.email;
+      const $newFirstName = document.createElement("span");
+      $newFirstName.classList.add("first-name");
+      $newFirstName.textContent = employee.name.first;
 
-  const $newCity = document.createElement("li");
-  $newCity.classList.add("city");
-  $newCity.textContent = employee.city;
+      const $newLastName = document.createElement("span");
+      $newLastName.classList.add("last-name");
+      $newLastName.textContent = employee.name.last;
 
-  $newEmployeeCard.appendChild($newPicture);
-  $newEmployeeCard.appendChild($newEmployeeInfo);
-  $newEmployeeInfo.appendChild($newName);
-  $newName.appendChild($newFirstName);
-  $newName.appendChild($newLastName);
-  $newEmployeeInfo.appendChild($newEmail);
-  $newEmployeeInfo.appendChild($newCity);
-  $employeeCardsWrapper.appendChild($newEmployeeCard);
-});
+      const $newEmail = document.createElement("li");
+      $newEmail.classList.add("email");
+      $newEmail.textContent = employee.email;
+
+      const $newCity = document.createElement("li");
+      $newCity.classList.add("city");
+      $newCity.textContent = employee.location.city;
+
+      $newEmployeeCard.appendChild($newPicture);
+      $newEmployeeCard.appendChild($newEmployeeInfo);
+      $newEmployeeInfo.appendChild($newName);
+      $newName.appendChild($newFirstName);
+      $newName.appendChild($newLastName);
+      $newEmployeeInfo.appendChild($newEmail);
+      $newEmployeeInfo.appendChild($newCity);
+      $employeeCardsWrapper.appendChild($newEmployeeCard);
+    });
+  })
+  .catch(function (err) {
+    console.log("Une erreure est survenue", err);
+  });
